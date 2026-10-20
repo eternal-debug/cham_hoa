@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Gửi Trinh · Ngày 20/10 Rực Rỡ</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./src/styles.css" />
+  </head>
+  <body>
+    <!-- Canvas vườn hoa muôn sắc rực rỡ & bầu trời sao lung linh -->
+    <canvas id="garden-canvas"></canvas>
+
+    <!-- Hạt sáng ambient & luồng ánh sáng thần tiên -->
+    <div id="ambient-glow"></div>
+    <div class="light-beams" aria-hidden="true"></div>
+
+    <div class="app-container">
+      <!-- 1. Màn hình chào sang trọng, lộng lẫy khi vừa vào web -->
+      <section id="intro-screen" class="screen active">
+        <div class="intro-glass-card">
+          <!-- Vòng hoa nụ & ánh kim lấp lánh trang trí quanh bì thư -->
+          <div class="wreath-ornament" aria-hidden="true">
+            <span class="sparkle-star s1">✦</span>
+            <span class="sparkle-star s2">★</span>
+            <span class="sparkle-star s3">✦</span>
+            <span class="sparkle-star s4">★</span>
+            <span class="sparkle-star s5">✦</span>
+          </div>
+
+          <div class="intro-tagline">
+            <span class="golden-ribbon">
+              <span class="ribbon-flower">✿</span> 20 · 10 · SPECIAL GIFT <span class="ribbon-flower">✿</span>
+            </span>
+          </div>
+
+          <h1 class="intro-title">Món Quà Dành Riêng Cho Em</h1>
+          <p class="intro-subtitle">Một bức thư nhỏ và cả một vùng trời hoa rực rỡ đang đợi Trinh khám phá</p>
+
+          <div class="envelope-outer" id="envelope-trigger" role="button" aria-label="Mở phong bì thư">
+            <!-- Vầng hào quang phát sáng sau phong bì -->
+            <div class="envelope-aura"></div>
+            
+            <div class="envelope">
+              <div class="envelope-flap"></div>
+              <div class="envelope-pocket"></div>
+              <div class="letter-peek">
+                <div class="peek-ornament">
+                  <span class="peek-line gold"></span>
+                  <span class="peek-line short"></span>
+                  <span class="peek-heart">♥</span>
+                </div>
+              </div>
+              <div class="wax-seal">
+                <div class="seal-inner">
+                  <span class="seal-letter">T</span>
+                </div>
+                <div class="seal-shine"></div>
+              </div>
+            </div>
+            <div class="envelope-shadow"></div>
+          </div>
+
+          <div class="intro-actions">
+            <button id="open-btn" class="luxe-open-btn">
+              <span class="btn-glow"></span>
+              <span class="btn-text">
+                <span class="btn-icon">💌</span> Chạm để mở thư
+              </span>
+            </button>
+          </div>
+
+          <div class="intro-hint">
+            <span class="hint-pulse"></span>
+            <span>Khu vườn phía sau sẽ bừng nở khi em khép lại bức thư này</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- 2. Modal / Khung hiển thị Bức thư tay quý phái -->
+      <section id="letter-screen" class="screen">
+        <div class="letter-backdrop"></div>
+        <div class="letter-modal" id="letter-modal">
+          <div class="letter-paper">
+            <div class="corner-ornament top-left"></div>
+            <div class="corner-ornament top-right"></div>
+            <div class="corner-ornament bottom-left"></div>
+            <div class="corner-ornament bottom-right"></div>
+
+            <div class="paper-texture"></div>
+            
+            <div class="letter-header">
+              <div class="header-stamp">
+                <span class="stamp-icon">🌸</span>
+                <span class="stamp-text">Hà Nội ➔ Sydney</span>
+              </div>
+              <span class="letter-date">Ngày 20 tháng 10</span>
+            </div>
+            
+            <div class="letter-body">
+              <h2 class="salutation">Chúc Trinh của anh,</h2>
+              <p class="paragraph">
+                Chúc cô gái của anh một ngày 20/10 dịu dàng và nhiều nụ cười.
+              </p>
+              <p class="paragraph">
+                Dù đang cách nhau cả múi giờ, anh vẫn luôn ở đây đồng hành và cổ vũ cho Trinh. Giữ sức khỏe thật tốt nhé, đợi tháng 12 em về rồi bù lại hết những ngày phải xa nhau!
+              </p>
+              <div class="letter-signature">
+                <span class="signature-title">Thương em thật nhiều,</span>
+                <span class="signature-handwritten">CuongTQ</span>
+                <span class="heart-symbol">❤</span>
+              </div>
+            </div>
+
+            <div class="letter-actions">
+              <button id="close-letter-btn" class="luxe-fold-btn">
+                <span class="btn-border-glow"></span>
+                <span class="btn-content">
+                  <span>Gập thư lại & mở muôn hoa</span>
+                  <span class="fold-arrow">➔</span>
+                </span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3. Giao diện sau khi hoa nở rực rỡ -->
+      <section id="garden-screen" class="screen">
+        <div class="garden-overlay">
+          <div class="floating-title">
+            <div class="badge-tag">
+              <span class="sparkle">✨</span>
+              <span>Đếm ngược ngày em về · Tháng 12</span>
+              <span class="sparkle">✨</span>
+            </div>
+            <h1 class="garden-heading">Muôn Hoa Rực Rỡ Đón Trinh</h1>
+            <p class="garden-subtext">Chạm ngón tay lên bất kỳ đâu trên màn hình để gieo nở thêm những đóa hoa mới</p>
+          </div>
+
+          <div class="bottom-controls">
+            <button id="reopen-letter-btn" class="control-pill glass-pill">
+              <span class="icon">✉</span> Đọc lại thư
+            </button>
+            <button id="replay-bloom-btn" class="control-pill gold-pill">
+              <span class="icon">↺</span> Xem lại hoa nở
+            </button>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <script type="module" src="./src/main.js"></script>
+  </body>
+</html>
